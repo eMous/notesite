@@ -1,6 +1,6 @@
 admin:
     name: admin 
-    email: caihuashuai@gmail.com
+    email: caiadmin
     password: caihuashuai
   
 django version:
