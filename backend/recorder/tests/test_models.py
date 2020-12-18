@@ -10,5 +10,5 @@ class SingleModelTestCase(TestCase):
     def test_animals_can_speak(self):
         """Animals that can speak are correctly identified"""
 
-        someOneVoiceContent = InstantContent.objects.get(contentType=InstantContent.ContentType.TYPE_VOICE)
+        someOneVoiceContent:InstantContent = InstantContent.objects.get(contentType=InstantContent.ContentType.TYPE_VOICE)
         self.assertEqual(someOneVoiceContent.contentType, InstantContent.ContentType.TYPE_LOCATION)
