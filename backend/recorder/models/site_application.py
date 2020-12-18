@@ -1,7 +1,8 @@
 from django.db.models import *
 from django.utils.translation import gettext_lazy as _
 
-
+class Manufacturer(Model):
+    kk = IntegerField(default=12)
 # Create your models here.
 class InstantContent(Model):
     """
@@ -37,8 +38,8 @@ class InstantContent(Model):
         TYPE_LOCATION = 2, _("Location")
         TYPE_VOICE = 3, _("Voice")
 
-    contentType = IntegerField(choices=ContentType.choices)
-
+    contentType = IntegerField(choices=ContentType.choices,null=True)
+    manufacturer = ForeignKey(Manufacturer, on_delete=CASCADE,null=True)
     def _str_(self):
         return self.title
 
