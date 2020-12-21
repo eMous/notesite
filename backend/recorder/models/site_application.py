@@ -1,8 +1,8 @@
 from django.db.models import *
+from .core import *
 from django.utils.translation import gettext_lazy as _
 
-class Manufacturer(Model):
-    kk = IntegerField(default=12)
+
 # Create your models here.
 class InstantContent(Model):
     """
@@ -33,13 +33,15 @@ class InstantContent(Model):
                 if the type is voice:
                     the converted text content
     """
+
     class ContentType(IntegerChoices):
         TYPE_TEXT_IMAGE = 1, _("Text & Image")
         TYPE_LOCATION = 2, _("Location")
         TYPE_VOICE = 3, _("Voice")
 
-    contentType = IntegerField(choices=ContentType.choices,null=True)
-    manufacturer = ForeignKey(Manufacturer, on_delete=CASCADE,null=True)
+    contentType = IntegerField(choices=ContentType.choices, null=True)
+    user = ForeignKey(to=RecordedUser, on_delete=models.CASCADE, null=True)
+
     def _str_(self):
         return self.title
 

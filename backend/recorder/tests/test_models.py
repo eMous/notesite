@@ -1,20 +1,18 @@
 from django.test import TestCase
 
-from recorder.models.site_application import InstantContent, Manufacturer
+from recorder.models.site_application import InstantContent
+from recorder.models.core import *
 
 
 class SingleModelTestCase(TestCase):
     def setUp(self):
-        manu=Manufacturer.objects.create()
-        InstantContent.objects.create(contentType=InstantContent.ContentType.TYPE_LOCATION,manufacturer=manu)
+        InstantContent.objects.create(contentType=InstantContent.ContentType.TYPE_LOCATION)
 
-    def test_animals_can_speak(self):
-        """Animals that can speak are correctly identified"""
+    def test_user_instant_content(self):
+        some_one_voice_content: InstantContent = InstantContent.objects.get(
+            contentType=InstantContent.ContentType.TYPE_LOCATION)
+        user = some_one_voice_content.user
+        all_users = RecordedUser.objects.all()
+        self.assertEqual(all_users.count(),0)
 
-        someOneVoiceContent:InstantContent = InstantContent.objects.get(contentType=InstantContent.ContentType.TYPE_LOCATION)
-        self.assertEqual(someOneVoiceContent.contentType, InstantContent.ContentType.TYPE_LOCATION)
-
-        manu:Manufacturer = Manufacturer.objects.get(kk=12)
-        s= manu.instantcontent_set
-        d = s.all()
-        a=1
+        self.assertEqual(1, 1)
