@@ -1,5 +1,7 @@
-from django.db.models import *
-from .core import *
+from django.db.models import Model, IntegerChoices, CASCADE, ForeignKey, IntegerField, BinaryField, TextField, \
+    FileField, URLField
+
+from .core import RecordedUser
 from django.utils.translation import gettext_lazy as _
 
 
@@ -39,8 +41,14 @@ class InstantContent(Model):
         TYPE_LOCATION = 2, _("Location")
         TYPE_VOICE = 3, _("Voice")
 
-    contentType = IntegerField(choices=ContentType.choices, null=True)
-    user = ForeignKey(to=RecordedUser, on_delete=models.CASCADE, null=True)
+    class CompressionMethod(IntegerChoices):
+        TYPE_GZIP = 1, _("gzip")
+
+    user = ForeignKey(to=RecordedUser, on_delete=CASCADE,null=True)
+    contentType = IntegerField(choices=ContentType.choices,null=True)
+    content = BinaryField(null=True)
+    compressionMethod = IntegerField(choices=CompressionMethod.choices, null=True)
+    textVersionContent = TextField(null=True)
 
     def _str_(self):
         return self.title
@@ -57,12 +65,16 @@ class File(Model):
     """
         uploadAs: FileField
             the file should be uploaded to "files/$uid/finished/$fileName"
+        downloadUrl: UrlField
+            the url to directly download the file
     """
+    uploadAs = FileField(null=True)
+    downloadUrl = URLField(null=True)
 
 
 class UploadingFile(Model):
     """
-        uploadAs: FileField
+        uploadingDir: FileField
             the file should be uploaded as "files/$uid/$filePathAbove/$count"
-        completeFileHash: CharField
     """
+    uploadingDir = FileField(null=True)
