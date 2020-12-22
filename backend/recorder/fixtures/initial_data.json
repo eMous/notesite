@@ -1,0 +1,10 @@
+[
+    {
+    "fields": {
+      "user": 0,
+      "contentType": 1
+    },
+    "model": "recorder.InstantContent",
+    "pk": 0
+  }
+]

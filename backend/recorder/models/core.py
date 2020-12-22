@@ -5,7 +5,6 @@ from django.db import models
 class RecordedUser(User):
     class Meta:
         proxy = True
-
     pass
 
 
