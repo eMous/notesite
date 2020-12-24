@@ -9,7 +9,6 @@ class RecordedUser(User):
         proxy = True
 
 
-
 class Record(models.Model):
     """
         time: DatetimeField
@@ -61,4 +60,3 @@ class Record(models.Model):
     softwareName = models.CharField(max_length=ModelConf.lowCharLenMax, null=True)
     softwareVersion = models.CharField(max_length=ModelConf.lowCharLenMax, null=True)
     other = models.TextField(null=True)
-

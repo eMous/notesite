@@ -19,7 +19,7 @@ from rest_framework import routers
 from recorder import views
 
 router = routers.DefaultRouter()
-router.register(r'todos', views.TodoView, 'recorder')
+router.register(r'users', views.UserView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

@@ -1,7 +1,8 @@
 from rest_framework import serializers
-#from .models import Todo
+from .models.core import RecordedUser
 
-class TodoSerializer(serializers.ModelSerializer):
+
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
-#        model = Todo
-        fields = ('id', 'title', 'description', 'completed')
+        model = RecordedUser
+        fields = ("id","username","email","first_name","is_staff",)
